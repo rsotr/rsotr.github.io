@@ -15,10 +15,17 @@ function makeAudio(path) {
     return audio
 }
 
+
+
 var click = makeAudio('static/sound/click.wav');
 var begin = makeAudio('static/sound/begin.wav');
 var during = makeAudio("static/sound/during.mp3");
+
+var audios = [click, begin, during]
+
 var storage = window.localStorage
+
+refreshSound = false
 
 updateClock = function() {
 
@@ -40,10 +47,13 @@ updateClock = function() {
     timer.innerHTML = `${daysUntil.toString().padStart(2, '0')}:${hoursUntil.toString().padStart(2, '0')}:${minutesUntil.toString().padStart(2, '0')}:${secondsUntil.toString().padStart(2, '0')}`
 
     if (!localStorage.getItem('mute')) {
+        if (refreshSound) {
+            refreshSound = false
+            during.cloneNode(true).play();
+        }
         click.cloneNode(true).play();
     }
 }
-
 
 function reloadMute() {
     if (!storage.getItem("mute")) {mute.innerHTML = `<i class="fas fa-volume-up muteIcon"></i>`} else {mute.innerHTML = `<i class="fas fa-volume-mute"></i>`}
@@ -74,10 +84,9 @@ timer.style.letterSpacing = "0px"
 enter.onclick = function() {
     if (!localStorage.getItem('mute')) {
         begin.cloneNode(true).play();
-    }
-    if (!localStorage.getItem('mute')) {
+
         during.cloneNode(true).play();
-        setInterval(function() {during.cloneNode(true).play();}, during.duration*1000)
+        setInterval(function() {refreshSound = true}, during.duration*1000)
     }
 
     timer.style.fontSize = "87px"
