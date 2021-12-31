@@ -7,8 +7,35 @@ var isUserInteracting = false,
     lat = 0, onMouseDownLat = 0,
     phi = 0, theta = 0;
 
-init();
-animate();
+var _speedconstant = 1.15600e-8;
+var d = new Date();
+var amount = 150000000;
+for (var i = amount; i > 0; i--) {}
+var newd = new Date();
+var accnewd = Number(String(newd.getSeconds()) + "." + String(newd.getMilliseconds()));
+var accd = Number(String(d.getSeconds()) + "." + String(d.getMilliseconds()));
+var di = accnewd - accd;
+if (d.getMinutes() != newd.getMinutes()) {di = (60 * (newd.getMinutes() - d.getMinutes())) + di}
+spd = ((_speedconstant * amount) / di);
+GHz = Math.round(spd * 1000) / 1000
+
+if (GHz > 2.5 && !new URLSearchParams(window.location.search).get("simpleView")) {
+    init();
+    animate();
+}
+
+if (new URLSearchParams(window.location.search).get("simpleView") == "true") {
+    animateNoUpdate();
+    document.getElementById("simpleView").innerHTML = "Load 3d view"
+    window.history.pushState({}, document.title, "/")
+}
+
+var cameraAmount = 0.0001
+var brightnessMultiplier = 1
+
+function randomNum(min, max) {
+    return Math.floor((Math.random() * max) + min)
+}
 
 function init() {
 
@@ -22,26 +49,34 @@ function init() {
     scene = new THREE.Scene();
 
     var geometry = new THREE.BoxGeometry(7, 7, 7);
-    geometry.applyMatrix(new THREE.Matrix4().makeScale(-1, 1, 1));
-
-var colors = [
-    0x120000,
-    0x090000,
-    0x150000,
-    0x110000,
-    0x100000,
-    0x030000
+    geometry.applyMatrix4(new THREE.Matrix4().makeScale(-1, 1, 1));
     
-]
+    var meshColors = []
+    min = 1
+    max = 15
 
-var material = [
-    new THREE.MeshBasicMaterial( { color: colors[0] } ),
-    new THREE.MeshBasicMaterial( { color: colors[1] } ),
-    new THREE.MeshBasicMaterial( { color: colors[2] } ),
-    new THREE.MeshBasicMaterial( { color: colors[3] } ),
-    new THREE.MeshBasicMaterial( { color: colors[4] } ), // front
-    new THREE.MeshBasicMaterial( { color: colors[5] } )
-    ];
+    meshColors = [
+        randomNum(min, max)*brightnessMultiplier,
+        randomNum(min, max)*brightnessMultiplier,
+        randomNum(min, max)*brightnessMultiplier,
+        randomNum(min, max)*brightnessMultiplier,
+        randomNum(min, max)*brightnessMultiplier,
+        randomNum(min, max)*brightnessMultiplier
+    ]
+
+    function getMaterial() {
+        
+        return [
+            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[0]).toString().padStart(2, '0').substring(0, 2)}0000` } ),
+            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[1]).toString().padStart(2, '0').substring(0, 2)}0000` } ),
+            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[2]).toString().padStart(2, '0').substring(0, 2)}0000` } ),
+            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[3]).toString().padStart(2, '0').substring(0, 2)}0000` } ),
+            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[4]).toString().padStart(2, '0').substring(0, 2)}0000` } ), // front
+            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[5]).toString().padStart(2, '0').substring(0, 2)}0000` } )
+        ]
+    }
+    var material = getMaterial()
+
     mesh = new THREE.Mesh( geometry, material );
 
     scene.add( mesh );
@@ -95,6 +130,38 @@ var material = [
 
     window.addEventListener( 'resize', onWindowResize, false );
 
+    setInterval(function() {
+        camera.rotation.x += cameraAmount
+        camera.rotation.z += cameraAmount
+        camera.rotation.y += cameraAmount
+    }, 2)
+    
+    setInterval(function() {
+
+        var oldColors = {colors:meshColors};
+        var newColors = {colors:[
+            randomNum(min, max)*brightnessMultiplier,
+            randomNum(min, max)*brightnessMultiplier,
+            randomNum(min, max)*brightnessMultiplier,
+            randomNum(min, max)*brightnessMultiplier,
+            randomNum(min, max)*brightnessMultiplier,
+            randomNum(min, max)*brightnessMultiplier
+        ]};
+
+        var tween = new TWEEN.Tween(oldColors).to(newColors, 400)
+            .easing(TWEEN.Easing.Linear.None)
+            .start()
+
+        tween.onUpdate(function(){
+            meshColors = oldColors.colors
+            mat = getMaterial()
+            mesh.material = mat
+        });
+    
+
+        
+    }, 500)
+
 }
 
 function onWindowResize() {
@@ -145,11 +212,14 @@ function animate(time) {
 
 }
 
-setInterval(function() {
-    camera.rotation.x += 0.0001
-    camera.rotation.z += 0.0001
-    camera.rotation.y += 0.0001
-}, 2)
+function animateNoUpdate(time) {
+
+    requestAnimationFrame( animateNoUpdate );
+    TWEEN.update(time);
+
+}
+
+
 
 function update() {
 
@@ -172,7 +242,6 @@ document.getElementById("enter").addEventListener("click", function() {
         .start()
 
     tween.onUpdate(function(){
-        console.log(position)
         camera.fov = position.fov
         camera.updateProjectionMatrix();
     });
