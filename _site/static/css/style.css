@@ -1,0 +1,83 @@
+
+@import url('./font.css');
+
+body {
+    background-color: black;
+    font-family:'Manrope' ;
+}
+
+#timer {
+    font-size:87px;
+    color:black;
+    -webkit-text-stroke-width: 10px;
+    -webkit-text-stroke-color: rgb(24, 0, 0);
+    z-index:1;
+    transition: -webkit-text-stroke-color 3s, text-shadow 3s, font-size 2s, letter-spacing 2s;
+    letter-spacing:50px;
+
+    text-shadow: 0 0 10px #fff, 0 0 20px red, 0 0 50px red;
+}
+
+#enter {
+    padding:50px 100px 50px 100px;
+    background-color:white;
+    z-index:2;
+    font-size:40px;
+    cursor:pointer;
+    transform-origin: 0 0 ;
+    border-radius: 10px;
+    transition: transform 2s, opacity 2s, border-radius .5s, background-color .5s, color .5s;
+}
+
+#enter:disabled {
+    background-color:rgb(177, 177, 177);
+    color:rgb(73, 73, 73);
+    border-radius:5px;
+}
+
+#mute {
+    position:absolute;
+    width:50px;
+    height:50px;
+    bottom:10px;
+    right:10px;
+    cursor:pointer;
+    color:black;
+    font-size:50px;
+    text-shadow: 0 0 3px white;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.all-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.horizontal-center {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
