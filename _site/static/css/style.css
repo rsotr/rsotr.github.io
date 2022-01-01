@@ -29,7 +29,7 @@ body {
 #enter {
     padding:50px 100px 50px 100px;
     background-color:white;
-    z-index:2;
+    z-index:5;
     font-size:40px;
     cursor:pointer;
     transform-origin: 0 0 ;
@@ -53,6 +53,8 @@ body {
     color:black;
     font-size:50px;
     text-shadow: 0 0 3px white;
+    transition: opacity 1s;
+    z-index:5
 }
 
 #simpleView {
@@ -64,10 +66,19 @@ body {
     font-size:15px;
     text-decoration:underline;
     text-shadow: 0 0 1px #FF000050;
+    z-index:5;
 }
 
 #simpleView:hover {
     color:rgb(150, 150, 150);
+}
+
+#body {
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    z-index:4;
 }
 
 .vertical-center {

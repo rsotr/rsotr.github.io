@@ -19,7 +19,7 @@ if (d.getMinutes() != newd.getMinutes()) {di = (60 * (newd.getMinutes() - d.getM
 spd = ((_speedconstant * amount) / di);
 GHz = Math.round(spd * 1000) / 1000
 
-if (GHz > 2.5 && !new URLSearchParams(window.location.search).get("simpleView")) {
+if (GHz > 2.5 && !new URLSearchParams(window.location.search).get("simpleView") ) {
     init();
     animate();
 }
@@ -242,8 +242,8 @@ document.getElementById("enter").addEventListener("click", function() {
         .start()
 
     tween.onUpdate(function(){
-        camera.fov = position.fov
-        camera.updateProjectionMatrix();
+        try{camera.fov = position.fov}catch{}
+        try{camera.updateProjectionMatrix();}catch{}
     });
     
 })

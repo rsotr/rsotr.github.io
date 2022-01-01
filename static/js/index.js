@@ -1,7 +1,8 @@
 timeTo = 1641378076000
 
 then = new Date(timeTo)
-then = new Date(new Date().getTime() + 37000)
+then = new Date(new Date().getTime() + 25000)
+now = new Date()
 
 timer = document.getElementById("timer")
 enter = document.getElementById("enter")
@@ -9,6 +10,7 @@ mute = document.getElementById("mute")
 simpleView = document.getElementById("simpleView")
 email = document.getElementById("email")
 container = document.getElementById("container")
+body = document.getElementById("body")
 
 function makeAudio(path) {
     var audio  = new Audio();
@@ -23,8 +25,10 @@ function makeAudio(path) {
 var click = makeAudio('static/sound/click.wav');
 var begin = makeAudio('static/sound/begin.wav');
 var during = makeAudio("static/sound/during.mp3");
-
-
+var riser = makeAudio("static/sound/riser.mp3")
+var singleShot = makeAudio("static/sound/single%20shot.mp3");
+var allShots = makeAudio("static/sound/shots%20full.mp3");
+var shotsRepeating = makeAudio("/static/sound/shots%20repeating.mp3");
 
 var audios = [click, begin, during]
 
@@ -32,6 +36,23 @@ var storage = window.localStorage
 
 refreshSound = false
 
+if ((then.getTime() - now.getTime()) <= 0) {
+    mainPage()
+}
+
+
+function mainPage() {
+    cameraAmount = 0.0001
+    brightnessMultiplier = 1
+    container.style.opacity = "100%"
+    document.body.style.transition = "none"
+    document.body.style.backgroundColor = "black"
+    //container.style.display = "none"
+    enter.style.display = "none"
+    timer.style.display = "none"
+    mute.style.display = "none"
+    
+}
 
 function doFinish() {
     // starts at 10 seconds
@@ -49,8 +70,13 @@ function doFinish() {
     var tween = new TWEEN.Tween(position).to({fov:110}, 5000).easing(TWEEN.Easing.Cubic.InOut).start()
 
     tween.onUpdate(function(){
-        camera.fov = position.fov;camera.updateProjectionMatrix();
+        try{camera.fov = position.fov;camera.updateProjectionMatrix();} catch{}
     });
+
+    setTimeout(function() {
+        // starts at 7 seconds
+        mute.style.opacity = 0
+    }, 3000)
 
     setTimeout(function() {
         container.style.opacity = 0
@@ -66,6 +92,37 @@ function doFinish() {
         });
 
         //starts at 5 seconds
+
+        setTimeout(function() {
+            //starts at 3 seconds
+            console.log("riser")
+            riser.play()
+        }, 2000)
+
+        setTimeout(function() {
+            // Starts when white
+            body.style.backgroundColor = "#FFFFFF"
+            
+            mainPage()
+
+            var opacity = {opacity:99};
+            var tween = new TWEEN.Tween(opacity).to({opacity:0}, 2000).start()
+
+            tween.onUpdate(function(){body.style.backgroundColor = `#FFFFFF${Math.floor(opacity.opacity).toString().padStart(2, "0")}`});
+            tween.onComplete(function() {body.style.backgroundColor = null});
+
+            allShots.play()
+            setTimeout(function() {
+                doRepeating = function() {
+                    rpt = shotsRepeating.cloneNode(true)
+                    rpt.volume = 0.4
+                    rpt.play()
+                }
+                doRepeating()
+                setInterval(doRepeating, 33000)
+            }, 16000)
+
+        }, 7000)
         
     }, 5000)
 }
