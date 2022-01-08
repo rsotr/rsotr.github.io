@@ -19,19 +19,22 @@ if (d.getMinutes() != newd.getMinutes()) {di = (60 * (newd.getMinutes() - d.getM
 spd = ((_speedconstant * amount) / di);
 GHz = Math.round(spd * 1000) / 1000
 
-if (GHz > 2.5 && !new URLSearchParams(window.location.search).get("simpleView") ) {
+var loaded = false
+
+if (GHz > 2.5 && new URLSearchParams(window.location.search).get("simpleView") != "" ) {
     init();
     animate();
 }
 
-if (new URLSearchParams(window.location.search).get("simpleView") == "true") {
+if (new URLSearchParams(window.location.search).get("simpleView") == "") {
     animateNoUpdate();
     document.getElementById("simpleView").innerHTML = "Load 3d view"
-    window.history.pushState({}, document.title, "/")
+    
 }
 
 var cameraAmount = 0.0001
 var brightnessMultiplier = 1
+
 
 function randomNum(min, max) {
     return Math.floor((Math.random() * max) + min)
@@ -44,6 +47,7 @@ function init() {
     container = document.getElementById( 'container' );
 
     camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, 1, 1100 );
+    
     camera.target = new THREE.Vector3(1, 1, 1);
 
     scene = new THREE.Scene();
@@ -161,8 +165,10 @@ function init() {
 
         
     }, 500)
+    loaded = true
 
 }
+if (!loaded && new URLSearchParams(window.location.search).get("simpleView") != "") location.reload()
 
 function onWindowResize() {
 

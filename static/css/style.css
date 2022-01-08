@@ -54,12 +54,24 @@ body {
     font-size:50px;
     text-shadow: 0 0 3px white;
     transition: opacity 1s;
-    z-index:5
+    z-index:10
 }
 
 #simpleView {
     position:absolute;
     bottom:10px;
+    left:10px;
+    cursor:pointer;
+    color:grey;
+    font-size:15px;
+    text-decoration:underline;
+    text-shadow: 0 0 1px #FF000050;
+    z-index:5;
+}
+
+#viewIntro {
+    position:absolute;
+    bottom:45px;
     left:10px;
     cursor:pointer;
     color:grey;
