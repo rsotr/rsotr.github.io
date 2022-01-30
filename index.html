@@ -7,17 +7,104 @@
     <body>
         
         <div id="container">
-            <button id="enter" class="all-center noselect" disabled>Spectate the room</button>
+            <div class="video-container" id="bgVideoContainer"></div>
+            <button id="enter" class="all-center noselect" disabled>View the RSOTR</button>
             
             <div id="timer" class="all-center noselect">00:00:00:00</div>
-            <div id="mute"></div>
-            <div id="simpleView">Load simple view</div>
-            <div id="viewIntro">View introduction</div>
-            
         </div>
-        <div id="body">
+        <div id="body" class="opacity"></div>
+        
 
+        <div id="icons" class="horizontal-center">
+            <a class="icon horizontal-center" id="icons-instagram" href="https://www.instagram.com/rsotr_/">
+                <i class="fab fa-instagram icon-text all-center"></i>
+            </a>
+            <a class="icon horizontal-center" id="icons-youtube" href="https://www.youtube.com/channel/UCIRkzdW1PQ7le7Q91VZJoKg">
+                <i class="fab fa-youtube icon-text all-center"></i>
+            </a>
+            <a class="icon horizontal-center" id="icons-soundcloud" href="https://soundcloud.com/rsotr">
+                <i class="fab fa-soundcloud icon-text all-center"></i>
+            </a>
         </div>
+        
+
+        <div class="opacity title" id="title" style="top:70px">Right Side Of The Room - RSOTR</div>
+
+        <div id="switch" class="opacity switch">
+
+            <div class="switchBox opacity" >
+                <div class="switch-item" id="switch-soundcloud" onclick="setSoundCloud()">
+                    <div class="vertical-center switch-center">SoundCloud</div>
+                </div>
+                <div class="switch-item" id="switch-youtube" onclick="setYouTube()">
+                    <div class="vertical-center switch-center">YouTube</div>
+                </div>
+            </div>
+        </div>
+        <div id="ep" class="opacity bio">
+            <div class="description opacity"><div class="bio-title">RSOTR - The EP</div>
+            The RSOTR EP is a 6 track, debut from Right Side Of The Room. Featuring genres from Lo-Fi to Deep House, many of the 5 producers skills are on show.
+            After 3 months of production and a month of teasers, you can finally listen to the EP on YouTube and SoundCloud.
+            <span class="br"></span>
+            Take a listen to the right of this text, or use the links above the title to see individual pages.
+            <span class="br"></span>
+            - Right Side Of The Room
+        </div>
+
+            <div class="embed opacity">
+                
+            </div>
+        </div>
+
+        <div class="opacity title" style="top:750px">The Tracks</div>
+
+        <div id="bio-1" class="opacity bio">
+            <div class="description opacity"></div>
+
+            <div class="embed opacity">
+                
+            </div>
+        </div>
+        <div id="bio-2" class="opacity bio">
+            <div class="description opacity"></div>
+
+            <div class="embed opacity">
+                
+            </div>
+        </div>
+        <div id="bio-3" class="opacity bio">
+            <div class="description opacity"></div>
+
+            <div class="embed opacity">
+                
+            </div>
+        </div>
+        <div id="bio-4" class="opacity bio">
+            <div class="description opacity"></div>
+
+            <div class="embed opacity">
+                
+            </div>
+        </div>
+        <div id="bio-5" class="opacity bio">
+            <div class="description opacity"></div>
+
+            <div class="embed opacity">
+                
+            </div>
+        </div>
+        <div id="bio-6" class="opacity bio">
+            <div class="description opacity"></div>
+
+            <div class="embed opacity">
+                
+            </div>
+        </div>
+        <div id="simpleView">Load simple view</div>
+        <div id="viewIntro">View introduction</div>
+        <div id="mute"></div>
+
+        
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

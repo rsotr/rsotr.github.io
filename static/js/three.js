@@ -22,6 +22,8 @@ GHz = Math.round(spd * 1000) / 1000
 var loaded = false
 
 if (GHz > 2.5 && new URLSearchParams(window.location.search).get("simpleView") != "" ) {
+
+
     init();
     animate();
 }
@@ -29,6 +31,7 @@ if (GHz > 2.5 && new URLSearchParams(window.location.search).get("simpleView") !
 if (new URLSearchParams(window.location.search).get("simpleView") == "") {
     animateNoUpdate();
     document.getElementById("simpleView").innerHTML = "Load 3d view"
+    document.getElementById("bgVideoContainer").innerHTML = `<video src="/static/sound/bgintro.mp4" class="video" autoplay="true" loop="true" muted="true" id="bgVideo"></video>`
     
 }
 
@@ -71,12 +74,12 @@ function init() {
     function getMaterial() {
         
         return [
-            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[0]).toString().padStart(2, '0').substring(0, 2)}0000` } ),
-            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[1]).toString().padStart(2, '0').substring(0, 2)}0000` } ),
-            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[2]).toString().padStart(2, '0').substring(0, 2)}0000` } ),
-            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[3]).toString().padStart(2, '0').substring(0, 2)}0000` } ),
-            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[4]).toString().padStart(2, '0').substring(0, 2)}0000` } ), // front
-            new THREE.MeshBasicMaterial( { color: `#${Math.floor(meshColors[5]).toString().padStart(2, '0').substring(0, 2)}0000` } )
+            new THREE.MeshBasicMaterial( { color: `#00${Math.floor(meshColors[0]).toString().padStart(2, '0').substring(0, 2)}00` } ),
+            new THREE.MeshBasicMaterial( { color: `#00${Math.floor(meshColors[1]).toString().padStart(2, '0').substring(0, 2)}00` } ),
+            new THREE.MeshBasicMaterial( { color: `#00${Math.floor(meshColors[2]).toString().padStart(2, '0').substring(0, 2)}00` } ),
+            new THREE.MeshBasicMaterial( { color: `#00${Math.floor(meshColors[3]).toString().padStart(2, '0').substring(0, 2)}00` } ),
+            new THREE.MeshBasicMaterial( { color: `#00${Math.floor(meshColors[4]).toString().padStart(2, '0').substring(0, 2)}00` } ), // front
+            new THREE.MeshBasicMaterial( { color: `#00${Math.floor(meshColors[5]).toString().padStart(2, '0').substring(0, 2)}00` } )
         ]
     }
     var material = getMaterial()
@@ -225,8 +228,6 @@ function animateNoUpdate(time) {
 
 }
 
-
-
 function update() {
 
     lat = Math.max( - 85, Math.min( 85, lat ) );
@@ -236,7 +237,6 @@ function update() {
     camera.position.z = 0;
 
     renderer.render( scene, camera );
-
 
 }
 

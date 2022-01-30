@@ -2,16 +2,19 @@
 @import url('./font.css');
 
 body {
-    background-color: black;
-    font-family:'Manrope' ;
+    background-color: rgb(0, 19, 0);
+    font-family:'Poppins' ;
+    font-weight:400;
     margin:0;
-    transition: background-color 6s
+    transition: background-color 7s;
+    
 }
 #container {
     width:100%;
     height:100%;
     z-index:0;
-    transition: opacity 8s;
+    transition: opacity 7s;
+    position:fixed
 }
 
 #timer {
@@ -24,6 +27,37 @@ body {
     letter-spacing:50px;
 
     text-shadow: 0 0 10px #fff, 0 0 20px red, 0 0 50px red;
+}
+
+
+.video-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: hidden;
+  }
+  .video-container video {
+    /* Make video to at least 100% wide and tall */
+    min-width: 100%; 
+    min-height: 100%; 
+  
+    /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+    width: auto;
+    height: auto;
+  
+    /* Center the video */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+#bgVideo {
+    position:fixed;
+    filter: saturate(500%) brightness(50%) contrast(145%) blur(100px);
+    z-index:-10
 }
 
 #enter {
@@ -44,7 +78,7 @@ body {
 }
 
 #mute {
-    position:absolute;
+
     width:50px;
     height:50px;
     bottom:10px;
@@ -54,11 +88,11 @@ body {
     font-size:50px;
     text-shadow: 0 0 3px white;
     transition: opacity 1s;
-    z-index:10
+    z-index:10;
+    position:fixed
 }
 
 #simpleView {
-    position:absolute;
     bottom:10px;
     left:10px;
     cursor:pointer;
@@ -67,10 +101,10 @@ body {
     text-decoration:underline;
     text-shadow: 0 0 1px #FF000050;
     z-index:5;
+    position:fixed
 }
 
 #viewIntro {
-    position:absolute;
     bottom:45px;
     left:10px;
     cursor:pointer;
@@ -79,6 +113,7 @@ body {
     text-decoration:underline;
     text-shadow: 0 0 1px #FF000050;
     z-index:5;
+    position:fixed
 }
 
 #simpleView:hover {
@@ -116,6 +151,186 @@ body {
     left: 50%;
     -ms-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
+}
+
+.title {
+    position:absolute;
+    color:white;
+    font-size:80px;
+    top:50px;
+    width:99%;
+    text-align:center;
+    font-weight:500;
+    text-shadow:0 0 10px rgb(255, 255, 255, 0.5);
+}
+
+.bio-title {
+    font-size:40px;
+    color:white;
+    padding-bottom:20px;
+    font-weight:500;
+    text-shadow:0 0 7px rgb(255, 255, 255, 0.3);
+    font-style: normal;
+
+}
+
+.switch {
+    left:10%;
+    height:60px;
+    width:calc(100% - 300px);
+    position:absolute;
+    color:white;
+    
+    top:200px;
+    z-index:10;
+}
+
+.switchBox {
+    height:100%;
+    position:absolute;
+    left:1000px;
+    width:300px;
+
+    background-color:rgb(0, 0, 0, 0.8);
+    border-radius: 10px;
+    box-shadow:0 0 10px rgb(0, 0, 0)
+    
+}
+
+.switch-item {
+    width:50%;
+    
+    background-color:rgb(255, 255, 255, 0);
+    height:100%;
+    cursor:pointer;
+    transition: background-color 0.2s
+}
+.switch-item:hover {
+    background-color:rgb(255, 255, 255, 0.2);
+}
+
+#switch-soundcloud {
+    border-radius:10px 0px 0px 10px;
+    left:0;
+    position:absolute;
+}
+#switch-youtube {
+    border-radius:0px 10px 10px 0px;
+    position:absolute;
+    right:0;
+    top:0;
+}
+
+.br {
+    display: block;
+    margin-bottom: 1em;
+}
+
+.switch-center {
+    left:25px
+}
+
+.bio {
+    left:10%;
+    height:300px;
+    width:calc(100% - 300px);
+    position:absolute;
+    color:white;
+    
+    top:300px;
+    z-index:10;
+    margin-bottom:200px;
+}
+
+.description {
+    font-style: italic;
+    height:100%;
+    width:700px;
+    position:absolute;
+    color:white;
+    background-color:rgb(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding:50px;
+    overflow-y:auto;
+    box-shadow:0 0 20px rgb(0, 0, 0)
+}
+
+.embed {
+    height:100%;
+    position:absolute;
+    left:1000px;
+
+    background-color:rgb(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding:50px;
+    box-shadow:0 0 20px rgb(0, 0, 0)
+}
+
+.opacity {
+    display:none;
+    opacity:0;
+}
+
+#icons {
+    width:70%;
+    position:absolute;
+    top:10px;
+    height:50px;
+    z-index:10
+}
+
+.icon {
+    background-color:rgb(0, 0, 0, 0.9);
+    color:white;
+    border-radius:50px;
+    border: 1px solid white;
+    
+    width:50px;
+    height:50px;
+    position:absolute;
+    cursor:pointer;
+    transition: background-color 0.1s;
+    text-shadow:0 0 7px rgb(255, 255, 255, 0.2);
+
+}
+.icon-text {
+    font-size:30px;
+    color:white;
+}
+
+#icons-instagram {
+    transform: none
+}
+#icons-youtube {
+    transform: translateX(-100px)
+}
+#icons-soundcloud {
+    transform: translateX(100px)
+}
+
+.icon:hover {
+    background-color:rgb(255, 255, 255, 0.8);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: white; 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(199, 199, 199); 
 }
 
 .noselect {
