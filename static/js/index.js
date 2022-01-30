@@ -1,7 +1,7 @@
 timeTo = 1644537601000
 
 then = new Date(timeTo)
-then = new Date(new Date().getTime() - 15000)
+//then = new Date(new Date().getTime() - 15000)
 now = new Date()
 
 timer = document.getElementById("timer")
